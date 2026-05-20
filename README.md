@@ -514,3 +514,154 @@ A unified premium React UI with:
 - Register page (auth UI)
 - Seamless navigation via React Router
 - Consistent high-end cinematic design system
+
+prompt 3:
+
+Enhance the existing React + Vite landing page project (Home, Login, Register pages with React Router) by adding subtle, modern, minimal entrance animations.
+
+DO NOT change layout, structure, colors, typography, spacing, or components.
+DO NOT introduce new UI libraries or animation libraries (no Framer Motion, no GSAP).
+Use ONLY vanilla CSS animations and transitions.
+
+--------------------------------------------------
+ANIMATION GOAL
+--------------------------------------------------
+
+The goal is to make the UI feel:
+- premium
+- cinematic
+- minimal
+- modern
+- smooth (not flashy or distracting)
+
+All animations must be subtle and fast (0.4s – 1.0s range).
+
+--------------------------------------------------
+GLOBAL PAGE LOAD ANIMATION
+--------------------------------------------------
+
+Apply a consistent page entrance animation for ALL pages:
+- Home
+- Login
+- Register
+
+When a page loads:
+- Entire page content should fade in smoothly
+- Slight upward motion (translateY)
+
+Example behavior:
+- opacity: 0 → 1
+- transform: translateY(10px) → translateY(0)
+
+Timing:
+- 0.6s ease-out
+
+Apply this using a reusable CSS class (e.g. .page-fade-in)
+and attach it to the main page wrapper in each page component.
+
+--------------------------------------------------
+HERO SECTION ANIMATION (HOME PAGE ONLY)
+--------------------------------------------------
+
+Add staggered text reveal animation:
+
+Elements:
+- "MATCH"
+- "YOUR"
+- "MATCH"
+- Subtitle
+- CTA button
+
+Animation style:
+- Each element fades in with slight delay
+- Slight upward movement (subtle)
+- Stagger timing:
+  - Title words: 0.1s delay between each
+  - Subtitle: after title completes
+  - CTA: last
+
+IMPORTANT:
+- Keep animation minimal and elegant
+- No bouncing, no scaling effects on text
+
+--------------------------------------------------
+CTA BUTTON ANIMATION (HOME PAGE)
+--------------------------------------------------
+
+On initial load:
+- Button should fade in slightly later than subtitle
+- Add very subtle scale-in:
+  scale(0.98 → 1)
+
+On hover (already existing):
+- keep orange glow and scale effect
+- do NOT change existing hover design
+
+--------------------------------------------------
+NAVBAR ANIMATION (ALL PAGES)
+--------------------------------------------------
+
+On page load:
+- Navbar fades in slightly earlier than content
+- Very subtle downward fade (translateY(-8px) → 0)
+
+No stagger needed inside navbar.
+
+--------------------------------------------------
+LOGIN / REGISTER PAGE ANIMATIONS
+--------------------------------------------------
+
+For the auth card:
+
+On page load:
+- Card fades in
+- Slight zoom-in effect:
+  scale(0.97 → 1)
+- Very subtle upward motion
+
+Input fields:
+- No load animation required
+- Only focus transitions remain
+
+Buttons:
+- No extra animations except existing hover
+
+--------------------------------------------------
+SCROLL / INTERACTION RULES
+--------------------------------------------------
+
+- No scroll-based animations
+- No parallax effects
+- No continuous animations
+- No looping animations
+
+ONLY entrance animations on page load + hover states
+
+--------------------------------------------------
+PERFORMANCE REQUIREMENTS
+--------------------------------------------------
+
+- Use CSS only (keyframes or transitions)
+- No JavaScript animation libraries
+- No heavy effects
+- Must be smooth at 60fps
+
+--------------------------------------------------
+DESIGN CONSISTENCY RULE
+--------------------------------------------------
+
+All animations must feel like part of the same system:
+- same timing curve (ease-out or cubic-bezier(0.2, 0.8, 0.2, 1))
+- same subtle motion distance
+- same fade-in style across pages
+
+--------------------------------------------------
+FINAL GOAL
+--------------------------------------------------
+
+Make the existing premium landing page feel more alive and modern through:
+- subtle page transitions
+- elegant staggered hero reveal
+- soft card entrance animations
+
+WITHOUT changing the visual identity or layout in any way.
