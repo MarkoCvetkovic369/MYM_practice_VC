@@ -7,7 +7,6 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  animation: pageFadeIn 1s var(--transition-slow) both;
 }
 
 .page__bg {
@@ -137,7 +136,7 @@
   right: 0;
   z-index: 100;
   height: var(--nav-height);
-  animation: slideDown 0.8s var(--transition-slow) 0.1s both;
+  animation: navbarFadeIn 0.5s var(--ease-entrance) both;
 }
 
 .navbar__inner {
@@ -223,7 +222,6 @@
   line-height: 0.88;
   letter-spacing: 0.02em;
   text-transform: uppercase;
-  animation: heroTitleIn 1.1s var(--transition-slow) 0.2s both;
 }
 
 .hero__match {
@@ -238,7 +236,7 @@
   left: clamp(0%, 2vw, 5%);
   top: clamp(0%, 1vw, 8%);
   z-index: 1;
-  animation: matchLeftIn 1s var(--transition-slow) 0.35s both;
+  animation: revealUp var(--duration-entrance) var(--ease-entrance) 0.1s both;
 }
 
 .hero__your {
@@ -249,14 +247,14 @@
   text-shadow:
     0 0 80px var(--color-accent-glow),
     0 0 120px rgba(244, 163, 0, 0.2);
-  animation: yourIn 1s var(--transition-slow) 0.25s both;
+  animation: revealUp var(--duration-entrance) var(--ease-entrance) 0.2s both;
 }
 
 .hero__match--right {
   right: clamp(0%, 2vw, 5%);
   bottom: clamp(0%, 2vw, 6%);
   z-index: 1;
-  animation: matchRightIn 1s var(--transition-slow) 0.45s both;
+  animation: revealUp var(--duration-entrance) var(--ease-entrance) 0.3s both;
 }
 
 /* --- Subtitle --- */
@@ -268,7 +266,7 @@
   text-transform: uppercase;
   color: var(--color-text);
   margin-bottom: clamp(2rem, 5vw, 3.5rem);
-  animation: fadeUp 0.9s var(--transition-slow) 0.55s both;
+  animation: revealUp var(--duration-entrance) var(--ease-entrance) 0.45s both;
 }
 
 /* --- CTA with flanking lines --- */
@@ -281,7 +279,7 @@
   width: 100%;
   max-width: 900px;
   margin-bottom: clamp(2rem, 5vw, 3rem);
-  animation: fadeUp 0.9s var(--transition-slow) 0.65s both;
+  animation: revealUp var(--duration-entrance) var(--ease-entrance) 0.55s both;
 }
 
 .hero__cta-line {
@@ -299,6 +297,7 @@
 
 .hero__cta-btn {
   flex-shrink: 0;
+  animation: ctaBtnIn var(--duration-entrance) var(--ease-entrance) 0.65s both;
 }
 
 /* --- Social icons --- */
@@ -308,7 +307,7 @@
   align-items: center;
   justify-content: center;
   gap: clamp(1.25rem, 3vw, 2rem);
-  animation: fadeUp 0.9s var(--transition-slow) 0.75s both;
+  animation: revealUp var(--duration-entrance) var(--ease-entrance) 0.75s both;
 }
 
 .hero__social-link {
@@ -339,7 +338,6 @@
   margin: 0 auto;
   padding: clamp(2.5rem, 6vw, 4rem) var(--container-padding)
     clamp(1.5rem, 4vw, 2.5rem);
-  animation: fadeUp 0.9s var(--transition-slow) 0.85s both;
 }
 
 .footer__main {
@@ -433,22 +431,21 @@
 }
 
 /* ============================================
-   ANIMATIONS
+   ENTRANCE ANIMATIONS
    ============================================ */
+
+.page-fade-in {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  animation: pageFadeIn var(--duration-entrance) ease-out 0.08s both;
+}
 
 @keyframes pageFadeIn {
   from {
     opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-@keyframes slideDown {
-  from {
-    opacity: 0;
-    transform: translateY(-16px);
+    transform: translateY(10px);
   }
   to {
     opacity: 1;
@@ -456,58 +453,50 @@
   }
 }
 
-@keyframes heroTitleIn {
+@keyframes navbarFadeIn {
   from {
     opacity: 0;
-    transform: scale(0.97);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-@keyframes yourIn {
-  from {
-    opacity: 0;
-    transform: scale(0.9);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-@keyframes matchLeftIn {
-  from {
-    opacity: 0;
-    transform: translateX(-24px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-@keyframes matchRightIn {
-  from {
-    opacity: 0;
-    transform: translateX(24px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-@keyframes fadeUp {
-  from {
-    opacity: 0;
-    transform: translateY(18px);
+    transform: translateY(-8px);
   }
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@keyframes revealUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes ctaBtnIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-fade-in,
+  .navbar,
+  .hero__match,
+  .hero__your,
+  .hero__subtitle,
+  .hero__cta,
+  .hero__cta-btn,
+  .hero__social,
+  .auth__card {
+    animation: none;
   }
 }
 
@@ -627,7 +616,6 @@
   align-items: center;
   padding: calc(var(--nav-height) + 2rem) var(--container-padding)
     clamp(2rem, 6vh, 4rem);
-  animation: fadeUp 0.9s var(--transition-slow) 0.15s both;
 }
 
 .auth {
@@ -652,7 +640,7 @@
     0 0 0 1px rgba(244, 163, 0, 0.06) inset,
     0 24px 48px rgba(0, 0, 0, 0.5),
     0 0 80px rgba(244, 163, 0, 0.08);
-  animation: authCardIn 0.9s var(--transition-slow) 0.2s both;
+  animation: authCardIn 0.7s var(--ease-entrance) 0.15s both;
 }
 
 .auth__title {
@@ -740,7 +728,7 @@
 @keyframes authCardIn {
   from {
     opacity: 0;
-    transform: translateY(20px) scale(0.98);
+    transform: translateY(10px) scale(0.97);
   }
   to {
     opacity: 1;
