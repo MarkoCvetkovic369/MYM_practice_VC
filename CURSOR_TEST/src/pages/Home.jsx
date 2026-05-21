@@ -1,14 +1,14 @@
 import Hero from '../components/Hero';
 import Footer from '../components/Footer';
 
-function Home() {
+function Home(props) {
   return (
-    <>
+    <div className="page-fade-in">
       <main className="page__main">
-        <Hero />
+        <Hero isExiting={props.isExiting} />
       </main>
       <Footer />
-    </>
+    </div>
   );
 }
 

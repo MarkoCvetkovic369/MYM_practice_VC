@@ -37,7 +37,7 @@ function Footer() {
 
       <div className="footer__bottom">
         <p className="footer__copyright">
-          &copy; 2025 MYM TEAM. All rights reserved.
+          &copy;  {new Date().getFullYear()} MYM TEAM. All rights reserved.
         </p>
         <nav className="footer__legal" aria-label="Legal">
           <ul>
