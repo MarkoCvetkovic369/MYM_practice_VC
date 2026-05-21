@@ -1,11 +1,11 @@
 import Hero from '../components/Hero';
 import Footer from '../components/Footer';
 
-function Home({ isExiting = false }) {
+function Home(props) {
   return (
     <div className="page-fade-in">
       <main className="page__main">
-        <Hero isExiting={isExiting} />
+        <Hero isExiting={props.isExiting} />
       </main>
       <Footer />
     </div>

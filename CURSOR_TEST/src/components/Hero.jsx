@@ -1,5 +1,6 @@
 import { FaInstagram, FaYoutube } from 'react-icons/fa';
 import { FaXTwitter } from 'react-icons/fa6';
+import { useNavigate } from 'react-router-dom';
 
 const socialLinks = [
   { href: 'https://instagram.com', label: 'Instagram', Icon: FaInstagram },
@@ -7,9 +8,10 @@ const socialLinks = [
   { href: 'https://x.com', label: 'X (Twitter)', Icon: FaXTwitter },
 ];
 
-function Hero({ isExiting = false }) {
+function Hero(props) {
+  const navigate = useNavigate();
   return (
-    <section className={`hero ${isExiting ? 'hero--exiting' : ''}`} aria-labelledby="hero-heading">
+    <section className={`hero ${props.isExiting ? 'hero--exiting' : ''}`} aria-labelledby="hero-heading">
       <div className="hero__title-wrap">
         <h1 id="hero-heading" className="hero__title">
           <span className="hero__match hero__match--left" aria-hidden="true">
@@ -27,7 +29,7 @@ function Hero({ isExiting = false }) {
 
       <div className="hero__cta">
         <span className="hero__cta-line" aria-hidden="true" />
-        <a href="#match-in" className="btn btn--primary hero__cta-btn">
+        <a href="#match-in" className="btn btn--primary hero__cta-btn" onClick={() => navigate('/register')}>
           MATCH IN
         </a>
         <span className="hero__cta-line" aria-hidden="true" />
