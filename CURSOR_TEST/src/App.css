@@ -137,6 +137,16 @@
   z-index: 100;
   height: var(--nav-height);
   animation: navbarFadeIn 0.5s var(--ease-entrance) both;
+  transition:
+    opacity 0.3s ease-out,
+    transform 0.3s ease-out;
+}
+
+.navbar--exiting {
+  opacity: 0;
+  transform: translateY(-16px);
+  animation: none;
+  pointer-events: none;
 }
 
 .navbar__inner {
@@ -230,6 +240,9 @@
   color: var(--color-text);
   white-space: nowrap;
   user-select: none;
+  transition:
+    transform 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+    opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .hero__match--left {
@@ -248,6 +261,9 @@
     0 0 80px var(--color-accent-glow),
     0 0 120px rgba(244, 163, 0, 0.2);
   animation: revealUp var(--duration-entrance) var(--ease-entrance) 0.2s both;
+  transition:
+    opacity 0.4s ease-out,
+    transform 0.4s ease-out;
 }
 
 .hero__match--right {
@@ -267,6 +283,9 @@
   color: var(--color-text);
   margin-bottom: clamp(2rem, 5vw, 3.5rem);
   animation: revealUp var(--duration-entrance) var(--ease-entrance) 0.45s both;
+  transition:
+    opacity 0.4s ease-out,
+    transform 0.4s ease-out;
 }
 
 /* --- CTA with flanking lines --- */
@@ -280,6 +299,9 @@
   max-width: 900px;
   margin-bottom: clamp(2rem, 5vw, 3rem);
   animation: revealUp var(--duration-entrance) var(--ease-entrance) 0.55s both;
+  transition:
+    opacity 0.4s ease-out,
+    transform 0.4s ease-out;
 }
 
 .hero__cta-line {
@@ -308,6 +330,37 @@
   justify-content: center;
   gap: clamp(1.25rem, 3vw, 2rem);
   animation: revealUp var(--duration-entrance) var(--ease-entrance) 0.75s both;
+  transition:
+    opacity 0.4s ease-out,
+    transform 0.4s ease-out;
+}
+
+/* --- Hero exit animation (Home → About) --- */
+
+.hero--exiting .hero__match--left {
+  transform: translateX(-120%);
+  opacity: 0;
+  animation: none;
+}
+
+.hero--exiting .hero__match--right {
+  transform: translateX(120%);
+  opacity: 0;
+  animation: none;
+}
+
+.hero--exiting .hero__your,
+.hero--exiting .hero__subtitle,
+.hero--exiting .hero__cta,
+.hero--exiting .hero__social {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: none;
+  transition-delay: 0.1s;
+}
+
+.hero--exiting .hero__cta-btn {
+  animation: none;
 }
 
 .hero__social-link {
@@ -430,6 +483,10 @@
   color: var(--color-text);
 }
 
+.navbar_logo-accent{
+  color: var(--color-accent);
+}
+
 /* ============================================
    ENTRANCE ANIMATIONS
    ============================================ */
@@ -495,8 +552,20 @@
   .hero__cta,
   .hero__cta-btn,
   .hero__social,
-  .auth__card {
+  .auth__card,
+  .about-animate {
     animation: none;
+  }
+
+  .hero--exiting .hero__match--left,
+  .hero--exiting .hero__match--right,
+  .hero--exiting .hero__your,
+  .hero--exiting .hero__subtitle,
+  .hero--exiting .hero__cta,
+  .hero--exiting .hero__social,
+  .navbar--exiting {
+    transition: none;
+    opacity: 0;
   }
 }
 
@@ -743,5 +812,306 @@
 
   .auth__card {
     padding: 1.75rem 1.35rem;
+  }
+}
+
+/* ============================================
+   ABOUT PAGE
+   ============================================ */
+
+.page__main--about {
+  justify-content: flex-start;
+  padding-top: calc(var(--nav-height) + 2rem);
+  padding-bottom: clamp(3rem, 8vh, 5rem);
+}
+
+.about {
+  width: 100%;
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 0 var(--container-padding);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(3.5rem, 8vw, 6rem);
+}
+
+/* --- Section 1: Hero statement --- */
+
+.about-hero {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 1.75rem;
+}
+
+.about-hero__heading {
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 8vw, 5rem);
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--color-text);
+}
+
+.about-hero__accent {
+  color: var(--color-accent);
+}
+
+.about-hero__body {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 300;
+  line-height: 1.7;
+  color: #aaaaaa;
+  max-width: 560px;
+}
+
+/* --- Section 2: Three pillars --- */
+
+.about-pillars {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(1.25rem, 3vw, 2rem);
+  align-items: stretch;
+}
+
+.about-pillar {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 40px 32px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.about-pillar--featured {
+  border-top: 2px solid var(--color-accent);
+  padding-top: 42px;
+  min-height: calc(100% + 12px);
+  transform: translateY(-6px);
+  box-shadow: 0 0 40px rgba(244, 163, 0, 0.06);
+}
+
+.about-pillar__icon {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 5vw, 3.5rem);
+  line-height: 1;
+  color: var(--color-accent);
+  letter-spacing: 0.02em;
+}
+
+.about-pillar__title {
+  font-family: var(--font-display);
+  font-size: clamp(1.75rem, 4vw, 2.25rem);
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-text);
+}
+
+.about-pillar__text {
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  font-weight: 300;
+  line-height: 1.65;
+  color: #aaaaaa;
+}
+
+/* --- Section 3: Manifesto quote --- */
+
+.about-quote {
+  width: 100%;
+  max-width: 720px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 1.5rem;
+}
+
+.about-quote__line {
+  width: 60px;
+  height: 1px;
+  background: var(--color-accent);
+}
+
+.about-quote__text {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: clamp(1.35rem, 3.5vw, 2rem);
+  font-style: italic;
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--color-text);
+}
+
+.about-quote__attrib {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 300;
+  letter-spacing: 0.08em;
+  color: #aaaaaa;
+}
+
+/* --- Section 4: Stats --- */
+
+.about-stats {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: clamp(2.5rem, 8vw, 5rem);
+}
+
+.about-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  text-align: center;
+}
+
+.about-stat__number {
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 8vw, 4rem);
+  line-height: 1;
+  color: var(--color-text);
+  letter-spacing: 0.02em;
+}
+
+.about-stat__label {
+  font-family: var(--font-body);
+  font-size: 0.8125rem;
+  font-weight: 400;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #aaaaaa;
+}
+
+/* --- Section 5: CTA strip --- */
+
+.about-cta {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 1.75rem;
+  padding-top: 0.5rem;
+}
+
+.about-cta__heading {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 6vw, 3.5rem);
+  font-weight: 400;
+  line-height: 1.05;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--color-text);
+}
+
+.about-cta__btn {
+  padding: 0.85rem 2.75rem;
+}
+
+/* --- About entrance animations --- */
+
+.about-animate--up {
+  animation: revealUp 0.6s var(--ease-entrance) both;
+}
+
+.about-animate--fade {
+  animation: aboutFadeIn 0.6s ease-out both;
+}
+
+.about-animate--delay-10 {
+  animation-delay: 0.1s;
+}
+
+.about-animate--delay-15 {
+  animation-delay: 0.15s;
+}
+
+.about-animate--delay-20 {
+  animation-delay: 0.2s;
+}
+
+.about-animate--delay-25 {
+  animation-delay: 0.25s;
+}
+
+.about-animate--delay-30 {
+  animation-delay: 0.3s;
+}
+
+.about-animate--delay-40 {
+  animation-delay: 0.4s;
+}
+
+.about-quote .about-animate--fade {
+  animation-duration: 0.8s;
+}
+
+@keyframes aboutFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* --- About responsive --- */
+
+@media (max-width: 1024px) {
+  .about-pillars {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .about-pillar--featured {
+    transform: none;
+    min-height: auto;
+  }
+
+  .about-pillar:last-child {
+    grid-column: 1 / -1;
+    max-width: 480px;
+    justify-self: center;
+    width: 100%;
+  }
+}
+
+@media (max-width: 640px) {
+  .page__main--about {
+    padding-top: calc(1.25rem + 2rem);
+  }
+
+  .about-hero__heading {
+    font-size: clamp(2.75rem, 12vw, 3rem);
+  }
+
+  .about-pillars {
+    grid-template-columns: 1fr;
+  }
+
+  .about-pillar:last-child {
+    grid-column: auto;
+    max-width: none;
+  }
+
+  .about-pillar--featured {
+    transform: none;
+  }
+
+  .about-stats {
+    flex-direction: column;
+    gap: 2rem;
   }
 }

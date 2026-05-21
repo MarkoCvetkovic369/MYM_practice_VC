@@ -7,9 +7,9 @@ const socialLinks = [
   { href: 'https://x.com', label: 'X (Twitter)', Icon: FaXTwitter },
 ];
 
-function Hero() {
+function Hero({ isExiting = false }) {
   return (
-    <section id="about" className="hero" aria-labelledby="hero-heading">
+    <section className={`hero ${isExiting ? 'hero--exiting' : ''}`} aria-labelledby="hero-heading">
       <div className="hero__title-wrap">
         <h1 id="hero-heading" className="hero__title">
           <span className="hero__match hero__match--left" aria-hidden="true">
